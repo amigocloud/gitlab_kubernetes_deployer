@@ -1,0 +1,17 @@
+apiVersion: skaffold/v1beta5
+kind: Config
+build:
+  local:
+    push: false
+    useDockerCLI: true
+    useBuildkit: true
+  artifacts:
+  - image:  
+profiles:
+  - name: release
+    build:
+      local:
+        push: true
+      tagPolicy:
+        envTemplate:
+          template: "{{.IMAGE_NAME}}:{{.VERSION}}"
